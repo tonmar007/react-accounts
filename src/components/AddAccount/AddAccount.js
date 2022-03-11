@@ -3,11 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 
 const AddAccount = (props) => {
-    // state = {
-    //     newAccount: {
-    //         id: "", name: "", lastname: "", phone: "", email: ""
-    //     }
-    // }
 
     const [newAccount, setNewAccount] = useState({
         id: "", name: "", lastname: "", phone: "", email: ""
@@ -19,7 +14,6 @@ const AddAccount = (props) => {
         let id = event.target.id;
         let newAccountCopy = { ...newAccount };
         newAccountCopy[id] = event.target.value;
-        // this.setState({ newAccount: newAccountCopy });
         setNewAccount(newAccountCopy)
     }
 
@@ -29,7 +23,6 @@ const AddAccount = (props) => {
     }
 
     const navigateToAccounts = () => {
-        //let navigate = useNavigate();
         navigate("/")
     }
 

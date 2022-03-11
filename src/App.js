@@ -26,6 +26,13 @@ class App extends Component {
         this.setState({accounts : newCopyAccounts})
     }
 
+    editAccountToState = (acc) => {
+        const copyAccounts = [ ...this.state.accounts];
+        let accountPossition = copyAccounts.map(account => account.id).indexOf(acc.id);
+        copyAccounts[accountPossition] = acc;
+        this.setState({accounts : copyAccounts})                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+    }
+
     render() {
         return (
             <Router>
@@ -34,7 +41,8 @@ class App extends Component {
                     <Route path="/" element={<AccountsTable accounts={this.state.accounts} />} />
                     <Route path="/add" element={<AddAccount addNewAccountToState={this.addNewAccountToState}/>} />
                     <Route path="/edit" element={<EditTable deleteAccount={this.deleteAccount} accounts={this.state.accounts}/>} />
-                    <Route path="/edit/:id" element={<EditAccount accounts={this.state.accounts}/>} />
+                    <Route path="/edit/:id" element={<EditAccount accounts={this.state.accounts}
+                    editAccountToState={this.editAccountToState}/>} />
                 </Routes>
             </Router>
         )
