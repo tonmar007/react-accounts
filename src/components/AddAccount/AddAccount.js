@@ -1,56 +1,55 @@
-import React, { Component } from "react";
-import { useNavigate } from "react-router-dom"
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-class AddAccount extends Component {
-    state = {
-        newAccount : {
-            id : "", name : "", lastname : "", phone : "", email : ""
-        }
-    }
 
-    changeHandler = (event) => {
+const AddAccount = (props) => {
+
+    const [newAccount, setNewAccount] = useState({
+        id: "", name: "", lastname: "", phone: "", email: ""
+    })
+
+    let navigate = useNavigate();
+
+    const changeHandler = (event) => {
         let id = event.target.id;
-        let newAccountCopy = {...this.state.newAccount};
+        let newAccountCopy = { ...newAccount };
         newAccountCopy[id] = event.target.value;
-        this.setState({newAccount : newAccountCopy});
+        setNewAccount(newAccountCopy)
     }
 
-    addNewAccount = () => {
-        this.props.addNewAccountToState(this.state.newAccount)
-        // this.navigateToAccounts()
+    const addNewAccount = () => {
+        props.addNewAccountToState(newAccount)
+        navigateToAccounts()
     }
 
-    // navigateToAccounts = () => {
-    //     let navigate = useNavigate();
-    //     navigate("/")
-    // }
+    const navigateToAccounts = () => {
+        navigate("/")
+    }
 
-    render(){
-        return (
-            <div className="container">
-                <div className="row">
-                    <div className="col-10 offset-1">
-                        <h2 className="display-4 m-4">Add Account</h2>
-                        <div className="row">
-                            <div className="col-10 offset-1">
-                                <input type="text" id="id" placeholder="id" className="form-control" 
-                                onChange={this.changeHandler}/> <br />
-                                <input type="text" id="name" placeholder="name" className="form-control" 
-                                onChange={this.changeHandler}/> <br />
-                                <input type="text" id="lastname" placeholder="lastname" className="form-control" 
-                                onChange={this.changeHandler}/> <br />
-                                <input type="text" id="phone" placeholder="phone" className="form-control" 
-                                onChange={this.changeHandler}/> <br />
-                                <input type="email" id="email" placeholder="email" className="form-control" 
-                                onChange={this.changeHandler}/> <br />
-                                <button onClick={this.addNewAccount} className="btn btn-primary form-control">Save</button>
-                            </div>
+    return (
+        <div className="container">
+            <div className="row">
+                <div className="col-10 offset-1">
+                    <h2 className="display-4 m-4">Add Account</h2>
+                    <div className="row">
+                        <div className="col-10 offset-1">
+                            <input type="text" id="id" placeholder="id" className="form-control"
+                                onChange={changeHandler} /> <br />
+                            <input type="text" id="name" placeholder="name" className="form-control"
+                                onChange={changeHandler} /> <br />
+                            <input type="text" id="lastname" placeholder="lastname" className="form-control"
+                                onChange={changeHandler} /> <br />
+                            <input type="text" id="phone" placeholder="phone" className="form-control"
+                                onChange={changeHandler} /> <br />
+                            <input type="email" id="email" placeholder="email" className="form-control"
+                                onChange={changeHandler} /> <br />
+                            <button onClick={addNewAccount} className="btn btn-primary form-control">Save</button>
                         </div>
                     </div>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default AddAccount;
